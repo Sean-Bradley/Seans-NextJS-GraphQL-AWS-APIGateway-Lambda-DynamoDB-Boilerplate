@@ -7,12 +7,14 @@ module.exports = (data) => {
         Key: {
             'id': data.id
         },
-        UpdateExpression: 'set #n = :n',
+        UpdateExpression: 'set #n = :n, #lfd = :lfd',
         ExpressionAttributeValues: {
-            ':n': data.name
+            ':n': data.name,
+            ':lfd': data.lastFedDate
         },
         ExpressionAttributeNames: {
-            '#n': 'name'
+            '#n': 'name',
+            '#lfd': 'lastFedDate'
         }
     };
     return dynamoDb.update(params).promise()

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactTable from "react-table";
+import DatePicker from "react-datepicker";
 
 class Cats extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ class Cats extends Component {
             editingId: {},
             catName: "",
             addButtonEnabled: false,
+            lastFedDate: new Date(),
             columns: [{
                 Header: 'Id',
                 accessor: 'id'
@@ -40,7 +42,13 @@ class Cats extends Component {
                     <div style={{ textAlign: "left" }}>Last Fed Date</div>
                 ),
                 id: 'lastFedDate',
-                accessor: row => (new Date(parseInt(row.lastFedDate)).toDateString())
+                //accessor: row => (new Date(parseInt(row.lastFedDate)).toDateString())
+                Cell: row => (
+                    !!this.state.editingId[row.original.id] ?
+                        <DatePicker id={"lastFedDate_" + row.original.id} selected={new Date(parseInt(row.original.lastFedDate))} onChange={(e) => this.handleLastFedDateChange(e, row.original.id)} />
+                        :
+                        (new Date(parseInt(row.original.lastFedDate)).toDateString())
+                )
             }, {
                 Header: () => (
                     <div style={{ textAlign: "left" }}>Date Added</div>
@@ -54,11 +62,11 @@ class Cats extends Component {
                 Cell: row => (
                     !!this.state.editingId[row.original.id] ?
                         <div>
-                            <button id={"saveButton_" + row.original.id} className="btn btn-warning" onClick={(e) => this.handleSaveEdit(row.original.id)}>Save</button>&nbsp;
-                                <button id={"cancelButton_" + row.original.id} className="btn btn-secondary" onClick={(e) => this.handleCancelEdit(row.original.id)}>Cancel</button>
+                            <button className="btn btn-warning" onClick={(e) => this.handleSaveEdit(row.original.id)}>Save</button>&nbsp;
+                                <button className="btn btn-secondary" onClick={(e) => this.handleCancelEdit(row.original.id)}>Cancel</button>
                         </div>
                         :
-                        <button id={"editButton_" + row.original.id} className="btn btn-success" onClick={(e) => this.handleEditClick(e, row.value)}>Edit</button>
+                        <button className="btn btn-success" onClick={(e) => this.handleEditClick(e, row.value)}>Edit</button>
                 )
             }, {
                 id: 'delete',
@@ -74,6 +82,7 @@ class Cats extends Component {
         this.handleCancelEdit = this.handleCancelEdit.bind(this);
         this.handleSaveEdit = this.handleSaveEdit.bind(this);
         this.refreshTableData = this.refreshTableData.bind(this);
+        this.handleLastFedDateChange = this.handleLastFedDateChange.bind(this);
     }
     refreshTableData() {
         fetch('https://wl2akb84i9.execute-api.us-east-1.amazonaws.com/dev/animals', {
@@ -86,24 +95,39 @@ class Cats extends Component {
             .then(data => {
                 this.setState({
                     data: data.data.listAnimals,
-                    table: {
-                        columns: this.state.columns,
-                        data: data.data.listAnimals
-                    }
+                    // table: {
+                    //     columns: this.state.columns,
+                    //     //data: data.data.listAnimals
+                    // }
                 })
             }).catch(function (error) {
                 console.log(error);
             });
     }
+    handleLastFedDateChange(date, id) {
+        //console.log(date)
+        //console.log(id)
+        const data = this.state.data;
+        data.forEach(function (row) {
+            if (row.id === id) {
+                row.lastFedDate = new Date(date).getTime().toString();
+            }
+        })
+        this.setState({
+            data: data
+        });
+    }
+
     handleSaveEdit(id) {
         const name = document.getElementById("input_" + id).value;
-        //console.log(id + " " + name);
+        const lastFedDate = new Date(document.getElementById("lastFedDate_" + id).value).getTime().toString();
+        //console.log(id + " " + name + " " + lastFedDate);
         fetch('https://wl2akb84i9.execute-api.us-east-1.amazonaws.com/dev/animals', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: `mutation { updateAnimal (id: "${id}", name: "${name}") {id, name, genus, isHungry, lastFedDate }}`
+            body: `mutation { updateAnimal (id: "${id}", name: "${name}", lastFedDate: "${lastFedDate}") {id, name, genus, isHungry, lastFedDate }}`
         }).then(() => {
             const editingId = this.state.editingId;
             editingId[id] = false;
@@ -192,8 +216,8 @@ class Cats extends Component {
 
                 <hr />
                 <div>
-                    <pre className="componentKeys">{JSON.stringify(Object.keys(this), undefined, 2)}</pre>
-                    <pre className="componentProps">{!!this._reactInternalFiber ? JSON.stringify(Object.keys(this._reactInternalFiber), undefined, 2) : ""}</pre>
+                    {/* <pre className="componentKeys">{JSON.stringify(Object.keys(this), undefined, 2)}</pre>
+                    <pre className="componentInternalFiber">{!!this._reactInternalFiber ? JSON.stringify(Object.keys(this._reactInternalFiber), undefined, 2) : ""}</pre>*/}
                     <pre className="componentState">{JSON.stringify(this.state, undefined, 2)}</pre>
                 </div>
             </div >

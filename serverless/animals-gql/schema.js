@@ -67,11 +67,13 @@ const schema = new GraphQLSchema({
             updateAnimal: {
                 args: {
                     id: { type: new GraphQLNonNull(GraphQLString) },
-                    name: { type: new GraphQLNonNull(GraphQLString) }                    
+                    name: { type: new GraphQLNonNull(GraphQLString) },
+                    lastFedDate: { type: new GraphQLNonNull(GraphQLString) }
+
                 },
                 type: animalType,
                 resolve: (parent, args) => updateAnimal(args)
-            }      
+            }
         }
     })
 });
