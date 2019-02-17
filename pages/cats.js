@@ -95,18 +95,12 @@ class Cats extends Component {
             .then(data => {
                 this.setState({
                     data: data.data.listAnimals,
-                    // table: {
-                    //     columns: this.state.columns,
-                    //     //data: data.data.listAnimals
-                    // }
                 })
             }).catch(function (error) {
                 console.log(error);
             });
     }
     handleLastFedDateChange(date, id) {
-        //console.log(date)
-        //console.log(id)
         const data = this.state.data;
         data.forEach(function (row) {
             if (row.id === id) {
@@ -215,11 +209,13 @@ class Cats extends Component {
                 />
 
                 <hr />
-                <div>
-                    {/* <pre className="componentKeys">{JSON.stringify(Object.keys(this), undefined, 2)}</pre>
-                    <pre className="componentInternalFiber">{!!this._reactInternalFiber ? JSON.stringify(Object.keys(this._reactInternalFiber), undefined, 2) : ""}</pre>*/}
-                    <pre className="componentState">{JSON.stringify(this.state, undefined, 2)}</pre>
-                </div>
+                {/* 
+                    <div>
+                        <pre className="componentKeys">{JSON.stringify(Object.keys(this), undefined, 2)}</pre>
+                        <pre className="componentInternalFiber">{!!this._reactInternalFiber ? JSON.stringify(Object.keys(this._reactInternalFiber), undefined, 2) : ""}</pre>
+                        <pre className="componentState">{JSON.stringify(this.state, undefined, 2)}</pre>                    
+                    </div>
+                */}
             </div >
         );
     }

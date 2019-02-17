@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Snapshot Testing App shows "seans nextjs, graphql, aws, apigateway, lambda, dynamodb boilerplate" 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="jumbotron text-center"
+  >
+    <h2>
+      seans nextjs, graphql, aws, apigateway, lambda, dynamodb boilerplate
+    </h2>
+    <p>
+      Boilerplate for NextJS, which uses ReactJS and NodeJS, sending GraphQL to an AWS Api Getway, which fronts an AWS Lambda, which Fronts an AWS DynamodDB.
+    </p>
+  </div>
+  <p>
+    Nothing to see here, go and see 
+    <a
+      href="/cats"
+      onClick={[Function]}
+    >
+      Cats
+    </a>
+     instead.
+  </p>
+</div>
+`;
