@@ -2,6 +2,7 @@ import App, { Container } from 'next/app'
 import React from 'react'
 import Head from '../components/head'
 import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 
 export default class MyApp extends App {
   // static async getInitialProps ({ Component, ctx }) {
@@ -20,6 +21,7 @@ export default class MyApp extends App {
         <Head />
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </Container>
     )
   }
