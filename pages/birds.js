@@ -6,7 +6,7 @@ class Birds extends Component {
         return (
             <div className="container">
                 <h1>Birds</h1>
-                <p>Nothing to see here, go and see {<Link href='/cats'><a>Cats</a></Link>} instead.<div>abc</div></p>
+                <p>Nothing to see here, go and see {<Link href='/cats'><a>Cats</a></Link>} instead.</p>
             </div>
         );
     }
