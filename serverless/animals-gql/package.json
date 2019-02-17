@@ -1,0 +1,16 @@
+{
+  "name": "animals-gql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.402.0",
+    "graphql": "^14.1.1"
+  }
+}

@@ -1,0 +1,36 @@
+.container {
+    width: 100%;
+    left: 10px;
+    right: 10px;
+}
+
+.form-inline label {
+    margin-left: 5px;
+}
+
+.form-inline input {
+    margin-left: 5px;
+}
+
+.form-inline button {
+    margin-left: 5px;
+}
+
+.componentKeys {
+    width: 200px;
+    height: 500px;
+    float: left;
+    margin-right: 10px;
+}
+
+.componentProps {
+    width: 700px;
+    height: 500px;
+    float: left;
+    margin-right: 10px;
+}
+
+.componentState {
+    width: 700px;
+    height: 500px;
+}
