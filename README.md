@@ -1,5 +1,7 @@
 # Seans-NextJS-GraphQL-AWS-APIGateway-Lambda-DynamoDB-Boilerplate 
 
+![Example Screenshot](demo.png)
+
 ## Setup
 
 Install AWS CLI using Pip3 from your python 3 install
